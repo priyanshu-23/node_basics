@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 
+app.locals.appdata = require('./data.json');
+
 const routes = require('./routes');
 
 app.set('view engine', 'ejs');
@@ -9,9 +11,15 @@ app.get('/', (req, res) => {
     res.render('default');
 });
 
+app.get ('/home',(req, res) => {
+    res.render('home');
+})
+
 app.get('/:name?', routes.names);
 
 app.get('/arr', routes.arr);
+
+
 
 
 app.get('/:paramOne/:paramTwo', (req, res) => {
